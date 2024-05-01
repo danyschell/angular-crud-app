@@ -6,13 +6,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoreService } from './core/core.service';
+import { Employee } from './interfaces/employee';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
 export class AppComponent implements OnInit {
+  
+  //employee: Employee;
+
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -26,7 +31,8 @@ export class AppComponent implements OnInit {
     'package',
     'action',
   ];
-  dataSource!: MatTableDataSource<any>;
+  //dataSource!: MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<Employee>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -35,7 +41,7 @@ export class AppComponent implements OnInit {
     private _dialog: MatDialog,
     private _empService: EmployeeService,
     private _coreService: CoreService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmployeeList();
@@ -52,16 +58,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getEmployeeList() {
-    this._empService.getEmployeeList().subscribe({
-      next: (res) => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      error: console.log,
-    });
-  }
+   getEmployeeList() {
+     this._empService.getEmployeeList().subscribe({
+       next: (res) => {
+         this.dataSource = new MatTableDataSource(res);
+         this.dataSource.sort = this.sort;
+         this.dataSource.paginator = this.paginator;
+       },
+       error: console.log,
+     });
+   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -82,7 +89,8 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openEditForm(data: any) {
+  openEditForm(data: Employee) {
+    console.log(data);
     const dialogRef = this._dialog.open(EmpAddEditComponent, {
       data,
     });

@@ -6,8 +6,6 @@
   </button>
 </mat-toolbar>
 
-
-
 <div class="main-body">
 
   <mat-form-field>
@@ -42,7 +40,7 @@
 
       <ng-container matColumnDef="dob">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> dob </th>
-        <td mat-cell *matCellDef="let row"> {{row.dob | date}}</td>
+        <td mat-cell *matCellDef="let row"> {{row.dob | date: 'MM/dd/yyyy'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="gender">
@@ -67,7 +65,7 @@
 
       <ng-container matColumnDef="package">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Package </th>
-        <td mat-cell *matCellDef="let row"> {{row.package | currency:'INR'}}L</td>
+        <td mat-cell *matCellDef="let row"> {{row.package | currency:'USD'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="action">
