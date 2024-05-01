@@ -20,9 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter'; 
 import {DatePipe} from '@angular/common';
-import { MomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core'
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -31,7 +30,6 @@ export const MY_FORMATS = {
       dateInput: 'LL'
   },
   display: {
-      //dateInput: 'YYYY-MM-DD',
       dateInput: 'MM-DD-YYYY',
       monthYearLabel: 'YYYY',
       dateA11yLabel: 'LL',
@@ -67,8 +65,6 @@ export const MY_FORMATS = {
     //{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
     MatDatepickerModule,  
     DatePipe,
-    //{ provide: MAT_DATE_LOCALE, useValue: 'en-US' }
-    //provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
